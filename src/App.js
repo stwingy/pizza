@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Navbar from './navbar/Navbar'
+import {Banner} from './banner/Banner'
+import Menu from './menu/Menu'
+import FoodDialogue from './fooddialogue/FoodDialogue'
+import Order from './order/Order'
+import CardParent from './responsiveCard/CardParent'
+import {GlobalStyle} from './styles/GlobalStyle'
+import {useOpenFood} from './hooks/useOpenFood'
+import {useOrders} from './hooks/useOrders'
 
 function App() {
+  const {openFood,setOpenFood} = useOpenFood()
+  const orders = useOrders()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <FoodDialogue openFood = {openFood} setOpenFood={setOpenFood} {...orders}/>
+    <Navbar/> 
+    <Order {...orders}/>
+    <Banner />
+    
+    <Menu setOpenFood={setOpenFood}/>
+    <CardParent/>
+    
+      <GlobalStyle />
+       
+    </>
   );
 }
 
