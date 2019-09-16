@@ -8,6 +8,7 @@ const MenuStyled = styled.div`
 	margin: 0 40% 50px 20px;
 	height: 1000px;
 `;
+//the click handler needs sorting out
 function Menu({ setOpenFood }) {
 	return (
 		<MenuStyled>
