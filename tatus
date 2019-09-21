@@ -1,0 +1,23 @@
+[33mcommit 272ae5a2a8c6b5958d9657714ca29ba0cdb5ac9e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Scallywag <scallywagjohn@outlook.com>
+Date:   Tue Sep 17 12:26:52 2019 +0100
+
+    favicon added useEffect document title
+
+[33mcommit e9b946df2bca7df243cc536beec96606e6797e56[m
+Author: Scallywag <scallywagjohn@outlook.com>
+Date:   Mon Sep 16 20:45:55 2019 +0100
+
+    second
+
+[33mcommit 1b63c9b1cfc8919fd3c523fe903b6d73c8888ed0[m
+Author: Scallywag <scallywagjohn@outlook.com>
+Date:   Mon Sep 16 20:42:20 2019 +0100
+
+    first
+
+[33mcommit fb0af27e846a8752fcff8a1cacc5183822aa5920[m
+Author: Scallywag <scallywagjohn@outlook.com>
+Date:   Tue Sep 10 18:24:04 2019 +0100
+
+    Initial commit from Create React App

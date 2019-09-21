@@ -6,14 +6,22 @@ export function formatPrice(price) {
 }
 
 const foodItems = [
-	{ name: 'Comfortable', img: '/img/i1.jpg', section: 'First', price: 1 },
-	{ name: 'With Josephine', img: '/img/i2.jpg', section: 'First', price: 2 },
-	{ name: 'Beaming', img: '/img/i3.jpg', section: 'First', price: 1 },
-	{ name: 'Churching with Maureen', img: '/img/i4.jpg', section: 'First', price: 1 },
-	{ name: 'Studying', img: '/img/i5.jpg', section: 'Second', price: 5 },
-	{ name: 'Cool', img: '/img/i6.jpg', section: 'Second', price: 3 },
-	{ name: 'Foutain', img: '/img/i7.png', section: 'Third', price: 5 },
-	{ name: 'Church', img: '/img/i8.jpg', section: 'Third', price: 7 }
+	{ name: 'Margherita', img: '/img/marg.jpg', section: 'Pizza', price: 3.5 },
+	{ name: 'Fungi', img: '/img/mushroom.jpg', section: 'Pizza', price: 3.75 },
+	{ name: 'Seafood', img: '/img/fishp.jpg', section: 'Pizza', price: 3.85 },
+	{ name: 'Mediteranean', img: '/img/mediteranean.jpg', section: 'Pizza', price: 3.9 },
+	{ name: 'Pepperoni', img: '/img/peperoni.jpg', section: 'Pizza', price: 3.8 },
+	{ name: 'Pepperoni/Salami', img: '/img/pep-salami.jpg', section: 'Pizza', price: 3 },
+	{ name: 'Special', img: '/img/pizzaspecial.jpg', section: 'Pizza', price: 5 },
+	{ name: 'Veggi', img: '/img/vegetablepizza.jpg', section: 'Pizza', price: 3.6 },
+	{ name: 'Cheese Burger', img: '/img/basiccheese.jpg', section: 'Burgers', price: 3.85 },
+
+	{ name: 'Chicken kebab', img: '/img/chickend.jpg', section: 'Kebabs', price: 3.8 },
+	{ name: 'Chicken Buurito', img: '/img/burrito.jpg', section: 'Other', price: 3.9 },
+	{ name: 'Chips', img: '/img/chips.jpg', section: 'Sides', price: 3 },
+	{ name: 'Delux Cheese Burger', img: '/img/deluxcheeseburger.jpg', section: 'Burgers', price: 5 },
+	{ name: 'Special Cheese Burger', img: '/img/sc.jpg', section: 'Burgers', price: 4.6 },
+	{ price: 1, name: 'Pop', section: 'Drinks', choices: [ 'Coke', 'Sprite', 'Tango' ] }
 ];
 export const foods = foodItems.reduce((acc, cur) => {
 	if (!acc[cur.section]) {

@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 import { Title } from '../styles/Title';
+import { pizzaRed } from '../styles/colors';
 export const FoodGrid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 20px;
 	align-items: center;
+	@media (max-width: 900px) {
+		grid-template-columns: 1fr 1fr ;
+  }
+  @media (max-width:600px) {
+		grid-template-columns:  1fr ;
+  }
 `;
 export const FoodLabel = styled(Title)`
 	position: absolute;
@@ -20,6 +27,7 @@ export const Food = styled.div`
 	filter: grayscale(.5);
 	padding: 1em;
 	border-radius: .5em;
+	border: 1px solid ${pizzaRed}
 	margin-top: 5px;
 	box-shadow: 0 0 2px 0 grey;
 	transition: all .2s ease-in;
