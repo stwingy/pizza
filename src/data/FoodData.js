@@ -21,7 +21,7 @@ const foodItems = [
 	{ name: 'Chips', img: '/img/chips.jpg', section: 'Sides', price: 3 },
 	{ name: 'Delux Cheese Burger', img: '/img/deluxcheeseburger.jpg', section: 'Burgers', price: 5 },
 	{ name: 'Special Cheese Burger', img: '/img/sc.jpg', section: 'Burgers', price: 4.6 },
-	{ price: 1, name: 'Pop', section: 'Drinks', choices: [ 'Coke', 'Sprite', 'Tango' ] }
+	{ price: 1, name: 'Soft Drink', section: 'Drinks', choices: ['Coke', 'Sprite', 'Tango'] }
 ];
 export const foods = foodItems.reduce((acc, cur) => {
 	if (!acc[cur.section]) {

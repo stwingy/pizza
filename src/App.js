@@ -34,7 +34,7 @@ function App() {
 				</div>
 				<FoodDialogue openFood={openFood} setOpenFood={setOpenFood} {...orders} />
 				<Navbar />
-				<Order {...orders} />
+				<Order {...orders} setOpenFood={setOpenFood} />
 				<div className="filter">
 					<Banner />
 				</div>

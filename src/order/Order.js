@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ConfirmButton, DialogueFooter, DialogueContent } from '../fooddialogue/FoodDialogue';
 import { formatPrice } from '../data/FoodData';
 import { device } from '../styles/device'
+import { pizzaRed } from '../styles/colors'
 const OrderStyled = styled.div`
 	position: fixed;
 
@@ -34,12 +35,18 @@ const OrderFooter = styled(DialogueFooter)`
 const OrderContainer = styled.div`
 	padding: 10px 0;
 	border-bottom: 1px solid grey;
+	${({ editable }) => editable && `
+	&:hover{
+		cursor:pointer;
+		background-color: #e7e7e7;
+	}`}
 `;
 const OrderItem = styled.div`
 	display: grid;
-	grid-template-columns: 20px 150px 5px 60px;
+	grid-template-columns: 20px 145px 60px 10px ;
+	align-items:center;
 	justify-content: space-between;
-	padding: 10px 0;
+	padding: 10px 10px;
 `;
 const DetailItem = styled.div`
 	color: gray;
@@ -55,25 +62,37 @@ function Order(props) {
 	}, 0);
 	const vat = subtotal * 0.15;
 	const total = subtotal + vat;
+	const deleteItem = index => {
+		//console.log(index, props)
+		const oldOrder = [...props.orders]
+		oldOrder.splice(index, 1)
+		props.setOrders(oldOrder)
+	}
 	return (
 		<OrderStyled active={props.orders.length ? true : false}>
 			{!props.orders.length ? (
 				<OrderContent>Order is empty</OrderContent>
 			) : (
 					<OrderContent>
-						<OrderContainer>Your Order:</OrderContainer>
-						{props.orders.map((o) => (
-							<OrderContainer>
-								<OrderItem>
+						<OrderContainer >Your Order:</OrderContainer>
+						{props.orders.map((o, index) => (
+							<OrderContainer editable>
+								<OrderItem onClick={() => props.setOpenFood({ ...o, index })}>
 									<div>{o.quantity}</div>
 									<div>{o.name}</div>
-									<div />
-
 									<div>{formatPrice(getPrice(o))}</div>
+									<div style={{ cursor: 'pointer' }} onClick={(e) => {
+										e.stopPropagation()
+										deleteItem(index)
+									}}>
+										<img src={`https://icon.now.sh/delete/${pizzaRed}`} alt="aa" className="delimg" /></div>
+
+
 								</OrderItem>
 								<DetailItem>
 									{o.toppings.filter((t) => t.checked).map((tp) => tp.name).join(', ')}
 								</DetailItem>
+								{o.choice && <DetailItem>{o.choice}</DetailItem>}
 							</OrderContainer>
 						))}
 						<OrderContainer>

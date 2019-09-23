@@ -7,7 +7,9 @@ import { formatPrice } from '../data/FoodData'
 import QuantityInput from './QuantityInput'
 import { useQuantity } from '../hooks/useQuantity'
 import { useToppings } from '../hooks/useToppings'
+import { useChoice } from '../hooks/useChoice'
 import Toppings from './Toppings'
+import Choices from './Choices'
 const Dialogue = styled.div`
 width:500px;
 position:fixed;
@@ -64,11 +66,16 @@ text-align:center;
 width:200px;
 cursor:pointer;
 background-color:${pizzaRed};
+${({ disabled }) => disabled && `
+opacity: .5;
+ponter-events: none;
+background-color: grey;`}
 `
 function FoodDialogueContainer(props) {
     console.log(props)
     const quantity = useQuantity(props.openFood && props.openFood.quantity)
     const toppings = useToppings(props.openFood.toppings)
+    const choiceRadio = useChoice(props.openFood.choice)
 
     function close() {
         props.setOpenFood("")
@@ -76,7 +83,14 @@ function FoodDialogueContainer(props) {
 
     if (!props.openFood) return null
 
-    const order = { ...props.openFood, quantity: quantity.value, toppings: toppings.toppings }
+    const order = { ...props.openFood, quantity: quantity.value, toppings: toppings.toppings, choice: choiceRadio.value }
+    const isEditing = props.openFood.index > -1
+    function editOrder(newOrder) {
+        const newOrders = [...props.orders]
+        newOrders[props.openFood.index] = order
+        props.setOrders(newOrders)
+        close()
+    }
     console.log("order ", order)
     function addToOrder() {
 
@@ -106,10 +120,11 @@ function FoodDialogueContainer(props) {
                         <h3>Extra Toppings</h3>
                         <Toppings {...toppings} />
                     </>}
-
+                    {props.openFood.choices && <Choices openFood={props.openFood} choiceRadio={choiceRadio} />}
                 </DialogueContent>
                 <DialogueFooter>
-                    <ConfirmButton onClick={addToOrder}>Add to Order: {formatPrice(getPrice(order))}</ConfirmButton>
+                    <ConfirmButton onClick={isEditing ? editOrder : addToOrder} disabled={props.openFood.choices && !choiceRadio.value}>
+                        {isEditing ? 'Update Order: ' : 'Add to Order: '}{formatPrice(getPrice(order))}</ConfirmButton>
                 </DialogueFooter>
             </Dialogue>
         </>
