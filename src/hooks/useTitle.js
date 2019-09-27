@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export function useTitle(openFood, { orders }) {
 	useEffect(() => {
-		console.log(openFood);
+
 		if (openFood) {
 			document.title = openFood.name;
 		} else {

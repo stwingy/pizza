@@ -4,6 +4,9 @@ import { ConfirmButton, DialogueFooter, DialogueContent } from '../fooddialogue/
 import { formatPrice } from '../data/FoodData';
 import { device } from '../styles/device'
 import { pizzaRed } from '../styles/colors'
+let TOTAL = 0
+const database = window.firebase.database()
+
 const OrderStyled = styled.div`
 	position: fixed;
 
@@ -52,7 +55,40 @@ const DetailItem = styled.div`
 	color: gray;
 	font-size: 10px;
 `;
+
+function sendOrder(orders, { email, displayName }) {
+
+	var newOrderRef = database.ref("orders").push();
+	const newOrders = orders.map(order => {
+		return Object.keys(order).reduce((acc, orderKey) => {
+			if (!order[orderKey]) {
+				// undefined value
+				return acc;
+			}
+			if (orderKey === "toppings") {
+				return {
+					...acc,
+					[orderKey]: order[orderKey]
+						.filter(({ checked }) => checked)
+						.map(({ name }) => name)
+				};
+			}
+			return {
+				...acc,
+				[orderKey]: order[orderKey],
+				total: TOTAL
+			};
+		}, {});
+	});
+	newOrderRef.set({
+		order: newOrders,
+		email,
+		displayName
+	});
+}
+
 function Order(props) {
+	const { login, loggedIn, setOpenOrderDialogue } = props
 	const toppingPrice = 1.5;
 	function getPrice(order) {
 		return order.quantity * (order.price + order.toppings.filter((t) => t.checked).length * toppingPrice);
@@ -76,7 +112,7 @@ function Order(props) {
 					<OrderContent>
 						<OrderContainer >Your Order:</OrderContainer>
 						{props.orders.map((o, index) => (
-							<OrderContainer editable>
+							<OrderContainer editable key={index}>
 								<OrderItem onClick={() => props.setOpenFood({ ...o, index })}>
 									<div>{o.quantity}</div>
 									<div>{o.name}</div>
@@ -114,9 +150,19 @@ function Order(props) {
 						</OrderContainer>
 					</OrderContent>
 				)}
-			<OrderFooter>
-				<ConfirmButton>Checkout</ConfirmButton>
-			</OrderFooter>
+			{props.orders.length > 0 && <OrderFooter>
+				<ConfirmButton onClick={() => {
+					if (loggedIn) {
+						TOTAL = formatPrice(total)
+						setOpenOrderDialogue(true)
+						sendOrder(props.orders, loggedIn)
+					} else {
+						login()
+					}
+				}}>
+					Checkout
+					</ConfirmButton>
+			</OrderFooter>}
 		</OrderStyled>
 	);
 }

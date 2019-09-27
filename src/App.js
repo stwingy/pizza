@@ -1,5 +1,5 @@
 import React from 'react';
-
+//https://pizza-ec68c.firebaseapp.com
 import Navbar from './navbar/Navbar';
 import { Banner } from './banner/Banner';
 import Menu from './menu/Menu';
@@ -11,10 +11,16 @@ import { useOpenFood } from './hooks/useOpenFood';
 import { useOrders } from './hooks/useOrders';
 import { useTitle } from './hooks/useTitle';
 import Footer from './Footer'
+import OrderDialogue from './order/OrderDialogue'
+import { useAuthentication } from './hooks/useAuthentication'
+import { useOrderDialogue } from './hooks/useOrderDialogue'
+//const database = window.firebase.database()
 function App() {
 	const { openFood, setOpenFood } = useOpenFood();
 	const orders = useOrders();
 	useTitle(openFood, { ...orders });
+	const auth = useAuthentication()
+	const orderDialogue = useOrderDialogue()
 	return (
 		<>
 			<>
@@ -32,9 +38,10 @@ function App() {
 					}}
 				>
 				</div>
+				<OrderDialogue{...orders} {...orderDialogue}></OrderDialogue>
 				<FoodDialogue openFood={openFood} setOpenFood={setOpenFood} {...orders} />
-				<Navbar />
-				<Order {...orders} setOpenFood={setOpenFood} />
+				<Navbar {...auth} />
+				<Order {...orders} setOpenFood={setOpenFood} {...auth} {...orderDialogue} />
 				<div className="filter">
 					<Banner />
 				</div>

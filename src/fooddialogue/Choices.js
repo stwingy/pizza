@@ -10,9 +10,10 @@ function Choices({ openFood, choiceRadio }) {
     return (
         <>
             <h3>Select from the following</h3>
-            {openFood.choices.map((choice) => (
-                <>
+            {openFood.choices.map((choice, i) => (
+                <React.Fragment key={i}>
                     <RadioInput
+
                         type="radio"
                         id={choice}
                         name="choice"
@@ -20,8 +21,8 @@ function Choices({ openFood, choiceRadio }) {
                         checked={choiceRadio.value === choice}
                         onChange={choiceRadio.onChange} />
 
-                    <Label for={choice}>{choice}</Label>{" "}
-                </>
+                    <Label htmlFor={choice}>{choice}</Label>{" "}
+                </React.Fragment>
             ))}
         </>
     )

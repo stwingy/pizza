@@ -72,7 +72,7 @@ ponter-events: none;
 background-color: grey;`}
 `
 function FoodDialogueContainer(props) {
-    console.log(props)
+
     const quantity = useQuantity(props.openFood && props.openFood.quantity)
     const toppings = useToppings(props.openFood.toppings)
     const choiceRadio = useChoice(props.openFood.choice)
@@ -91,7 +91,7 @@ function FoodDialogueContainer(props) {
         props.setOrders(newOrders)
         close()
     }
-    console.log("order ", order)
+
     function addToOrder() {
 
         props.setOrders([...props.orders, order])
