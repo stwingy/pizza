@@ -14,6 +14,7 @@ import Footer from './Footer'
 import OrderDialogue from './order/OrderDialogue'
 import { useAuthentication } from './hooks/useAuthentication'
 import { useOrderDialogue } from './hooks/useOrderDialogue'
+import ErrorBoundry from './ErrorBoundry'
 //const database = window.firebase.database()
 function App() {
 	const { openFood, setOpenFood } = useOpenFood();
@@ -41,7 +42,10 @@ function App() {
 				<OrderDialogue{...orders} {...orderDialogue}></OrderDialogue>
 				<FoodDialogue openFood={openFood} setOpenFood={setOpenFood} {...orders} />
 				<Navbar {...auth} />
-				<Order {...orders} setOpenFood={setOpenFood} {...auth} {...orderDialogue} />
+				<ErrorBoundry>
+					<Order {...orders} setOpenFood={setOpenFood} {...auth} {...orderDialogue} />
+				</ErrorBoundry>
+
 				<div className="filter">
 					<Banner />
 				</div>
