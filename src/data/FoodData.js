@@ -17,7 +17,7 @@ const foodItems = [
 	{ name: 'Cheese Burger', img: '/img/basiccheese.jpg', section: 'Burgers', price: 3.85 },
 
 	{ name: 'Chicken kebab', img: '/img/chickend.jpg', section: 'Kebabs', price: 3.80 },
-	{ name: 'Chicken Buurito', img: '/img/burrito.jpg', section: 'Other', price: 3.90 },
+	{ name: 'Chicken Burito', img: '/img/burrito.jpg', section: 'Other', price: 3.90 },
 	{ name: 'Chips', img: '/img/chips.jpg', section: 'Sides', price: 3.00 },
 	{ name: 'Delux Cheese Burger', img: '/img/deluxcheeseburger.jpg', section: 'Burgers', price: 5 },
 	{ name: 'Special Cheese Burger', img: '/img/sc.jpg', section: 'Burgers', price: 4.60 },
